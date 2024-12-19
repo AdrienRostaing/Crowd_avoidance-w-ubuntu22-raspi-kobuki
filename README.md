@@ -217,6 +217,33 @@ bash
 Copy code
 ros2 topic list
 
+
+Options to Resolve cmd_vel_mux Issue
+1. Check If cmd_vel_mux Is Truly Required
+The kobuki_keyop package might reference cmd_vel_mux, but it might not be essential for your current use case.
+If kobuki_keyop is optional for your project, you can continue without it. Skip to Step 3 if this is the case.
+2. Use an Alternative (e.g., twist_mux)
+In ROS 2, the cmd_vel_mux functionality is often replaced by twist_mux.
+
+Install twist_mux:
+
+bash
+Copy code
+sudo apt install ros-humble-twist-mux
+Modify the kobuki_keyop package to use twist_mux:
+
+Edit the package.xml file:
+xml
+Copy code
+<depend>twist_mux</depend>
+Update any launch files or configuration files to reference twist_mux.
+Rebuild the workspace:
+
+bash
+Copy code
+colcon build --symlink-install
+
+
 Step 10: Launch YDLidar Driver
 Run the YDLidar ROS2 Driver:
 
